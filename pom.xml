@@ -1,11 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.news.feed</groupId>
-  <artifactId>feed</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  
-  <dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.news.feed</groupId>
+	<artifactId>feed</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -89,87 +91,101 @@
 			<groupId>com.finder</groupId>
 			<artifactId>fileeditor</artifactId>
 			<version>2.6.2.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/CKFinderPlugin-FileEditor-2.6.2.1.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.finder</groupId>
 			<artifactId>imgresize</artifactId>
 			<version>2.6.2.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/CKFinderPlugin-ImageResize-2.6.2.1.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.finder</groupId>
 			<artifactId>watermark</artifactId>
 			<version>2.6.2.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/CKFinderPlugin-Watermark-2.6.2.1.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.finder</groupId>
 			<artifactId>ckfinder</artifactId>
 			<version>2.6.2.1</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/CKFinder-2.6.2.1.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>net.coobird</groupId>
 			<artifactId>thumbnailator</artifactId>
 			<version>0.4.8</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/lib/thumbnailator-0.4.8.jar</systemPath>
 		</dependency>
 	</dependencies>
-	<!--Cấu hình build ứng dụng-->
+	<!--Cấu hình build ứng dụng -->
 	<build>
 		<finalName>Java-In-Heroku</finalName>
 		<plugins>
-			<!--Set JDK Complier Level-->
+			<!--Set JDK Complier Level -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-  				<artifactId>maven-compiler-plugin</artifactId>
-	  			<version>2.3.2</version>
-		  		<configuration>
-			  		<source>1.8</source>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
 					<target>1.8</target>
-  				</configuration>
-	  		</plugin>
+				</configuration>
+			</plugin>
 
-      			<!--For Maven Tomcat Plugin-->
-      			<plugin>
-	  			<groupId>org.apache.tomcat.maven</groupId>
-		  		<artifactId>tomcat7-maven-plugin</artifactId>
+			<!--For Maven Tomcat Plugin -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
-  				<configuration>
-	  				<path>/Java-In-Heroku</path>
-		  		</configuration>
-  			</plugin>
+				<configuration>
+					<path>/Java-In-Heroku</path>
+				</configuration>
+			</plugin>
 
 			<plugin>
-				<!--Webapp Runner-->
+				<!--Webapp Runner -->
 				<groupId>org.apache.maven.plugins</groupId>
-        			<artifactId>maven-dependency-plugin</artifactId>
-        			<version>2.3</version>
-        			<executions>
-          				<execution>
-            					<phase>package</phase>
-              					<goals><goal>copy</goal></goals>
-                				<configuration>
-                  					<artifactItems>
-                    						<artifactItem>
-                      							<groupId>com.github.jsimone</groupId>
-                      							<artifactId>webapp-runner</artifactId>
-                      							<version>8.5.11.2</version>
-                      							<destFileName>webapp-runner.jar</destFileName>
-                    						</artifactItem>
-                  					</artifactItems>
-                				</configuration>
-             				</execution>
-        			</executions>
-      			</plugin>
-    
-    		</plugins>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.github.jsimone</groupId>
+									<artifactId>webapp-runner</artifactId>
+									<version>8.5.11.2</version>
+									<destFileName>webapp-runner.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.5.2</version>
+				<executions>
+					<execution>
+						<id>install-external</id>
+						<phase>clean</phase>
+						<configuration>
+							<file>${basedir}/lib/thumbnailator-0.4.8.jar</file>
+							<repositoryLayout>default</repositoryLayout>
+							<groupId>net.coobird</groupId>
+							<artifactId>thumbnailator</artifactId>
+							<version>0.4.8</version>
+							<packaging>jar</packaging>
+							<generatePom>true</generatePom>
+						</configuration>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 
 	</build>
 </project>

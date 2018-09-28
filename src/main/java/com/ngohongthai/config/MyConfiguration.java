@@ -19,7 +19,7 @@ public class MyConfiguration extends Configuration {
 	public void init() throws Exception {
 		super.init();
 		this.baseURL = this.servletConf.getServletContext().getContextPath() + "/resources/";
-		this.baseDir = "F:\\ReactJS\\news\\src\\main\\webapp\\resources\\";
+//		this.baseDir = "F:\\ReactJS\\news\\src\\main\\webapp\\resources\\";
 //		this.baseDir = "../resources/";
 	}
 
